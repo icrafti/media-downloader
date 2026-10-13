@@ -17,6 +17,29 @@ python yt_downloader.py
 
 или двойной клик по **«Скачать (GUI).bat»** (откроется без консольного окна).
 
+## Портативный EXE — без установки Python
+
+Готовый файл: **`dist/MediaDownloader.exe`** (~110 МБ, см. [Releases](https://github.com/icrafti/media-downloader/releases)).
+Внутри уже всё нужное: Python, yt-dlp, libtorrent и **ffmpeg с ffprobe** — скопируйте файл
+на любой компьютер с Windows 10/11 и запускайте двойным кликом. Настройки (`settings.json`)
+и журнал ошибок (`error.log`) создаются рядом с exe.
+
+- Для YouTube при бот-проверке дополнительно рекомендуется **Node.js** в системе.
+- Сборка доверенная — используйте exe из официальных Releases этого репозитория.
+
+Пересобрать exe самостоятельно:
+
+```
+pip install pyinstaller
+python -m PyInstaller --onefile --noconsole --name MediaDownloader ^
+  --add-binary "bin/ffmpeg.exe;." --add-binary "bin/ffprobe.exe;." ^
+  --collect-all yt_dlp --hidden-import libtorrent yt_downloader.py
+```
+
+`bin/` — положите туда `ffmpeg.exe` и `ffprobe.exe` (подойдёт essentials-сборка с gyan.dev).
+Проверить, что попало в сборку: `python build_diag.py` — или тем же набором флагов соберите
+его в exe и запустите.
+
 ## Зависимости
 
 ```

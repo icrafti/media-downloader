@@ -12,6 +12,7 @@ import json
 import os
 import queue
 import shutil
+import sys
 import threading
 import time
 import traceback
@@ -21,7 +22,13 @@ from tkinter import filedialog, messagebox, ttk
 
 import yt_dlp
 
-APP_DIR = os.path.dirname(os.path.abspath(__file__))
+# в portable-exe настройки и журнал храним рядом с самим exe, а не во временной папке
+APP_DIR = (os.path.dirname(sys.executable) if getattr(sys, "frozen", False)
+           else os.path.dirname(os.path.abspath(__file__)))
+
+# ffmpeg/ffprobe, встроенные в exe, лежат в корне временной папки распаковки
+if getattr(sys, "frozen", False):
+    os.environ["PATH"] = sys._MEIPASS + os.pathsep + os.environ.get("PATH", "")
 DEFAULT_DIR = os.path.join(os.path.expanduser("~"), "Downloads")
 SETTINGS_FILE = os.path.join(APP_DIR, "settings.json")
 WINDOW_TITLE = "Media Downloader"

@@ -9,3 +9,9 @@ downloads/
 __pycache__/
 *.pyc
 gui-test-screenshots/
+
+# сборка exe
+bin/
+build/
+dist/
+*.spec
