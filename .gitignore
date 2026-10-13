@@ -1,0 +1,11 @@
+# локальные настройки и журнал ошибок
+settings.json
+error.log
+
+# скачанные файлы
+downloads/
+
+# артефакты разработки
+__pycache__/
+*.pyc
+gui-test-screenshots/
